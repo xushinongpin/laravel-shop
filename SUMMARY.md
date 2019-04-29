@@ -14,7 +14,7 @@
   * [1.8. 常见问题 免费](methods/18-chang-jian-wen-ti-mian-fei.md)
 * [第二章. 舞台布置](di-er-7ae0-wu-tai-bu-zhi.md)
   * [2.1. 开发环境  免费](di-er-7ae0-wu-tai-bu-zhi/21-kai-fa-huan-jing-mian-fei.md)
-  * 2.2. 需求分析 免费
+  * [2.2. 需求分析 免费](di-er-7ae0-wu-tai-bu-zhi/22-xu-qiu-fen-xi-mian-fei.md)
   * 2.3. 开发思路 免费
   * 2.4. 创建应用
   * 2.5. 辅助函数
