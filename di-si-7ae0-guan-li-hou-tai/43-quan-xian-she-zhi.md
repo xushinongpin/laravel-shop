@@ -86,3 +86,11 @@
 
 
 
+上传图片显示不出来  请执行命令
+
+```
+php artisan storage:link
+```
+
+
+
