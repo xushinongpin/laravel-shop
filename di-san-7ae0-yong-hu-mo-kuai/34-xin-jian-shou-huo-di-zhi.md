@@ -189,3 +189,258 @@ const app = new Vue({
 
 
 
+## 2. 模板页面
+
+接下来我们把刚才的 Vue 组件放到模板中：
+
+```
+$ touch resources/views/user_addresses/create_and_edit.blade.php
+```
+
+_resources/views/user\_addresses/create\_and\_edit.blade.php_
+
+```
+@extends('layouts.app')
+@section('title', '新增收货地址')
+
+@section('content')
+  <div class="row">
+    <div class="col-md-10 offset-lg-1">
+      <div class="card">
+        <div class="card-header">
+          <h2 class="text-center">
+            新增收货地址
+          </h2>
+        </div>
+        <div class="card-body">
+          <form class="form-horizontal" role="form">
+            <!-- inline-template 代表通过内联方式引入组件 -->
+            <select-district inline-template>
+              <div class="form-row">
+                <label class="col-form-label col-sm-2 text-md-right">省市区</label>
+                <div class="col-sm-3">
+                  <select class="form-control" v-model="provinceId">
+                    <option value="">选择省</option>
+                    <option v-for="(name, id) in provinces" :value="id">@{{ name }}</option>
+                  </select>
+                </div>
+                <div class="col-sm-3">
+                  <select class="form-control" v-model="cityId">
+                    <option value="">选择市</option>
+                    <option v-for="(name, id) in cities" :value="id">@{{ name }}</option>
+                  </select>
+                </div>
+                <div class="col-sm-3">
+                  <select class="form-control" v-model="districtId">
+                    <option value="">选择区</option>
+                    <option v-for="(name, id) in districts" :value="id">@{{ name }}</option>
+                  </select>
+                </div>
+              </div>
+            </select-district>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+@endsection
+
+```
+
+注意看`<select-district inline-template>`这一行，`select-district`就是我们的组件名称，之前在 JS 代码里通过`Vue.component('select-district', { /****/ })`定义的。`inline-template`则代表被`<select-district inline-template></select-district>`包裹的代码会作为这个组件的模板，也称为`内联模板`。
+
+> 注意：`$ npm run watch-poll`要一直保持运行
+
+现在访问一下页面看看效果：[http://shop.test/user\_addresses/create](http://shop.test/user_addresses/create)
+
+[![](https://iocaffcdn.phphub.org/uploads/images/201806/01/5320/YVikNiKGck.gif?imageView2/2/w/1240/h/0 "file")](https://iocaffcdn.phphub.org/uploads/images/201806/01/5320/YVikNiKGck.gif?imageView2/2/w/1240/h/0)
+
+接下来我们需要把省市区组件的数据放到表单里提交给后端，创建一个新的 Vue 组件来监听`select-district`的`change`事件：
+
+```
+$ touch resources/js/components/UserAddressesCreateAndEdit.js
+```
+
+_resources/js/components/UserAddressesCreateAndEdit.js_
+
+```
+// 注册一个名为 user-addresses-create-and-edit 的组件
+Vue.component('user-addresses-create-and-edit', {
+  // 组件的数据
+  data() {
+    return {
+      province: '', // 省
+      city: '', // 市
+      district: '', // 区
+    }
+  },
+  methods: {
+    // 把参数 val 中的值保存到组件的数据中
+    onDistrictChanged(val) {
+      if (val.length === 3) {
+        this.province = val[0];
+        this.city = val[1];
+        this.district = val[2];
+      }
+    }
+  }
+});
+```
+
+其中`onDistrictChanged()`方法将用于处理`select-district`组件抛出的`change`事件，把事件的数据复制到本组件中。
+
+最后在`app.js`中引入这个组件：
+
+_resources/js/app.js_
+
+```
+.
+.
+.
+require('./components/SelectDistrict');
+require('./components/UserAddressesCreateAndEdit');
+.
+.
+.
+```
+
+下面把新组件也放到模板中：
+
+_resources/views/user\_addresses/create\_and\_edit.blade.php_
+
+```
+@extends('layouts.app')
+@section('title', '新增收货地址')
+
+@section('content')
+<div class="row">
+<div class="col-md-10 offset-lg-1">
+<div class="card">
+  <div class="card-header">
+    <h2 class="text-center">
+      新增收货地址
+    </h2>
+  </div>
+  <div class="card-body">
+    <!-- 输出后端报错开始 -->
+    @if (count($errors) > 0)
+      <div class="alert alert-danger">
+        <h4>有错误发生：</h4>
+        <ul>
+          @foreach ($errors->all() as $error)
+            <li><i class="glyphicon glyphicon-remove"></i> {{ $error }}</li>
+          @endforeach
+        </ul>
+      </div>
+    @endif
+    <!-- 输出后端报错结束 -->
+    <!-- inline-template 代表通过内联方式引入组件 -->
+    <user-addresses-create-and-edit inline-template>
+      <form class="form-horizontal" role="form">
+        <!-- 引入 csrf token 字段 -->
+      {{ csrf_field() }}
+      <!-- 注意这里多了 @change -->
+        <select-district @change="onDistrictChanged" inline-template>
+          <div class="form-group row">
+            <label class="col-form-label col-sm-2 text-md-right">省市区</label>
+            <div class="col-sm-3">
+              <select class="form-control" v-model="provinceId">
+                <option value="">选择省</option>
+                <option v-for="(name, id) in provinces" :value="id">@{{ name }}</option>
+              </select>
+            </div>
+            <div class="col-sm-3">
+              <select class="form-control" v-model="cityId">
+                <option value="">选择市</option>
+                <option v-for="(name, id) in cities" :value="id">@{{ name }}</option>
+              </select>
+            </div>
+            <div class="col-sm-3">
+              <select class="form-control" v-model="districtId">
+                <option value="">选择区</option>
+                <option v-for="(name, id) in districts" :value="id">@{{ name }}</option>
+              </select>
+            </div>
+          </div>
+        </select-district>
+        <!-- 插入了 3 个隐藏的字段 -->
+        <!-- 通过 v-model 与 user-addresses-create-and-edit 组件里的值关联起来 -->
+        <!-- 当组件中的值变化时，这里的值也会跟着变 -->
+        <input type="hidden" name="province" v-model="province">
+        <input type="hidden" name="city" v-model="city">
+        <input type="hidden" name="district" v-model="district">
+        <div class="form-group row">
+          <label class="col-form-label text-md-right col-sm-2">详细地址</label>
+          <div class="col-sm-9">
+            <input type="text" class="form-control" name="address" value="{{ old('address', $address->address) }}">
+          </div>
+        </div>
+        <div class="form-group row">
+          <label class="col-form-label text-md-right col-sm-2">邮编</label>
+          <div class="col-sm-9">
+            <input type="text" class="form-control" name="zip" value="{{ old('zip', $address->zip) }}">
+          </div>
+        </div>
+        <div class="form-group row">
+          <label class="col-form-label text-md-right col-sm-2">姓名</label>
+          <div class="col-sm-9">
+            <input type="text" class="form-control" name="contact_name" value="{{ old('contact_name', $address->contact_name) }}">
+          </div>
+        </div>
+        <div class="form-group row">
+          <label class="col-form-label text-md-right col-sm-2">电话</label>
+          <div class="col-sm-9">
+            <input type="text" class="form-control" name="contact_phone" value="{{ old('contact_phone', $address->contact_phone) }}">
+          </div>
+        </div>
+        <div class="form-group row text-center">
+          <div class="col-12">
+            <button type="submit" class="btn btn-primary">提交</button>
+          </div>
+        </div>
+      </form>
+    </user-addresses-create-and-edit>
+  </div>
+</div>
+</div>
+</div>
+@endsection
+```
+
+代码解析：
+
+* `<`
+  `select-district @change="onDistrictChanged" inline-template`
+  `>`
+  可以看到比之前多了一个
+  `@change="onDistrictChanged"`
+  ，代表
+  `select-district`
+  的
+  `change`
+  事件将由
+  `onDistrictChanged`
+  这个方法来处理。
+* 当用户选择了省市区之后，触发了
+  `select-district`
+  组件的
+  `change`
+  事件，被
+  `user-addresses-create-and-edit`
+  的
+  `onDistrictChanged`
+  捕获之后就会更新
+  `user-addresses-create-and-edit`
+  组件内的数据，然后就映射到 3 个隐藏的
+  `input`
+  中去。
+
+再后面的代码就是很简单表单 Html，这里不再过多解释。
+
+刷新一下页面看看效果：
+
+[![](https://iocaffcdn.phphub.org/uploads/images/201812/19/5320/Vv4iha0pwa.png!large "file")](https://iocaffcdn.phphub.org/uploads/images/201812/19/5320/Vv4iha0pwa.png!large)
+
+  
+
+
