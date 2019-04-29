@@ -119,6 +119,21 @@ MAIL_ENCRYPTION=null
 .
 .
 .
+
+//也可以自行在mailtrap.io这个网站注册邮箱测试
+.
+.
+.
+MAIL_DRIVER=smtp
+MAIL_HOST=smtp.mailtrap.io
+MAIL_PORT=2525
+MAIL_USERNAME=9dd22ef8f914b3
+MAIL_PASSWORD=41a01d6350391c
+MAIL_FROM_ADDRESS=from@example.com
+MAIL_FROM_NAME=Example
+.
+.
+.
 ```
 
 这样在我们代码里发送的邮件都会在之前的面板里看到。
