@@ -26,7 +26,7 @@
   * [3.3. 收货地址列表](di-san-7ae0-yong-hu-mo-kuai/33-shou-huo-di-zhi-lie-biao.md)
   * [3.4. 新建收货地址](di-san-7ae0-yong-hu-mo-kuai/34-xin-jian-shou-huo-di-zhi.md)
   * [3.5. 修改和删除收货地址](di-san-7ae0-yong-hu-mo-kuai/35-xiu-gai-he-shan-chu-shou-huo-di-zhi.md)
-  * 3.6. 小结
+  * [3.6. 小结](di-san-7ae0-yong-hu-mo-kuai/36-xiao-jie.md)
 * [第四章. 管理后台](di-si-7ae0-guan-li-hou-tai.md)
   * 4.1. 安装 laravel-admin 扩展包
   * 4.2. 用户列表
