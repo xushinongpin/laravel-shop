@@ -187,8 +187,6 @@ const app = new Vue({
 
 > 本小节涉及到较多的 Vue / JS 知识，本课程的核心是 Laravel / PHP 的高级应用，因此不会太过详细解释每一个 Vue / JS 相关的知识点，有兴趣深入学习 Vue.js 的同学推荐学习下 Summer 的实战课程 ——[《Vue.js 实战教程 - 基础篇》](https://learnku.com/laravel/t/12298/vuejs)，可以为你节省很多时间。
 
-
-
 ## 2. 模板页面
 
 接下来我们把刚才的 Vue 组件放到模板中：
@@ -244,7 +242,6 @@ _resources/views/user\_addresses/create\_and\_edit.blade.php_
     </div>
   </div>
 @endsection
-
 ```
 
 注意看`<select-district inline-template>`这一行，`select-district`就是我们的组件名称，之前在 JS 代码里通过`Vue.component('select-district', { /****/ })`定义的。`inline-template`则代表被`<select-district inline-template></select-district>`包裹的代码会作为这个组件的模板，也称为`内联模板`。
@@ -441,6 +438,157 @@ _resources/views/user\_addresses/create\_and\_edit.blade.php_
 
 [![](https://iocaffcdn.phphub.org/uploads/images/201812/19/5320/Vv4iha0pwa.png!large "file")](https://iocaffcdn.phphub.org/uploads/images/201812/19/5320/Vv4iha0pwa.png!large)
 
-  
+## 3. 提交表单
 
+接下来要做的就是保存用户提交的数据，根据[编码规范](https://learnku.com/docs/laravel-specification/5.5/form-validation)，我们需要在`Request`类中完成数据校验，我们先创建一个`Request`基类：
+
+```
+$ php artisan make:request Request
+```
+
+_app/Http/Requests/Request.php_
+
+```
+<?php
+
+namespace App\Http\Requests;
+
+use Illuminate\Foundation\Http\FormRequest;
+
+class Request extends FormRequest
+{
+    public function authorize()
+    {
+        return true;
+    }
+}
+```
+
+接下来创建`UserAddressRequest`类并继承`Request`基类：
+
+```
+$ php artisan make:request UserAddressRequest
+```
+
+_app/Http/Requests/UserAddressRequest.php_
+
+```
+<?php
+
+namespace App\Http\Requests;
+
+class UserAddressRequest extends Request
+{
+    public function rules()
+    {
+        return [
+            'province'      => 'required',
+            'city'          => 'required',
+            'district'      => 'required',
+            'address'       => 'required',
+            'zip'           => 'required',
+            'contact_name'  => 'required',
+            'contact_phone' => 'required',
+        ];
+    }
+}
+```
+
+接下来在控制器中创建对应的方法：
+
+_app/Http/Controllers/UserAddressesController.php_
+
+```
+use App\Http\Requests\UserAddressRequest;
+.
+.
+.
+    public function store(UserAddressRequest $request)
+    {
+        $request->user()->addresses()->create($request->only([
+            'province',
+            'city',
+            'district',
+            'address',
+            'zip',
+            'contact_name',
+            'contact_phone',
+        ]));
+
+        return redirect()->route('user_addresses.index');
+    }
+.
+.
+.
+```
+
+* Laravel 会自动调用
+  `UserAddressRequest`
+  中的
+  `rules()`
+  方法获取校验规则来对用户提交的数据进行校验，因此这里我们不需要手动调用
+  `$this-`
+  `>`
+  `validate()`
+  方法。
+* `$request-`
+  `>`
+  `user()`
+  获取当前登录用户。
+* `user()-`
+  `>`
+  `addresses()`
+  获取当前用户与地址的
+  **关联关系**
+  （注意：这里并不是获取当前用户的地址列表）
+* `addresses()-`
+  `>`
+  `create()`
+  在关联关系里创建一个新的记录。
+* `$request-`
+  `>`
+  `only()`
+  通过白名单的方式从用户提交的数据里获取我们所需要的数据。
+* `return redirect()-`
+  `>`
+  `route('user_addresses.index');`
+  跳转回我们的地址列表页面。
+
+然后创建对应路由：
+
+_routes/web.php_
+
+```
+.
+.
+.
+Route::group(['middleware' => ['auth', 'verified']], function() {
+    Route::get('user_addresses', 'UserAddressesController@index')->name('user_addresses.index');
+    Route::get('user_addresses/create', 'UserAddressesController@create')->name('user_addresses.create');
+    Route::post('user_addresses', 'UserAddressesController@store')->name('user_addresses.store');
+});
+```
+
+最后我们把这个路由放到前台表单的`action`属性里：
+
+_resources/views/user\_addresses/create\_and\_edit.blade.php_
+
+```
+.
+.
+.
+<user-addresses-create-and-edit inline-template>
+    <form class="form-horizontal" role="form" action="{{ route('user_addresses.store') }}" method="post">
+.
+.
+.
+```
+
+刷新页面之后，我们可以试一下直接提交表单：
+
+[![](https://iocaffcdn.phphub.org/uploads/images/201806/01/5320/xR4CLGXOUa.png?imageView2/2/w/1240/h/0 "file")](https://iocaffcdn.phphub.org/uploads/images/201806/01/5320/xR4CLGXOUa.png?imageView2/2/w/1240/h/0)
+
+可以看到`UserAddressRequest`类的验证规则是生效的。
+
+但是这个提示语言都是英文，对用户并不友好，我们需要改成中文：
 
