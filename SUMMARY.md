@@ -29,7 +29,7 @@
   * [3.6. 小结](di-san-7ae0-yong-hu-mo-kuai/36-xiao-jie.md)
 * [第四章. 管理后台](di-si-7ae0-guan-li-hou-tai.md)
   * [4.1. 安装 laravel-admin 扩展包](di-si-7ae0-guan-li-hou-tai/41-an-zhuang-laravel-admin-kuo-zhan-bao.md)
-  * 4.2. 用户列表
+  * [4.2. 用户列表](di-si-7ae0-guan-li-hou-tai/42-yong-hu-lie-biao.md)
   * 4.3. 权限设置
   * 4.4. 小结
 * [第五章. 商品模块](di-wu-7ae0-shang-pin-mo-kuai.md)
