@@ -592,3 +592,113 @@ _resources/views/user\_addresses/create\_and\_edit.blade.php_
 
 但是这个提示语言都是英文，对用户并不友好，我们需要改成中文：
 
+
+
+## 4. 中文语言包
+
+通过安装`overtrue/laravel-lang`这个扩展包可以直接把语言变成中文：
+
+```
+$ composer require overtrue/laravel-lang
+```
+
+安装成功后，在`config/app.php`文件中将以下这一行：
+
+```
+Illuminate\Translation\TranslationServiceProvider::class,
+```
+
+替换为：
+
+```
+Overtrue\LaravelLang\TranslationServiceProvider::class,
+```
+
+最后，我们还需要修改系统语言，将原本的值`en`改成`zh-CN`：
+
+_config/app.php_
+
+```
+.
+.
+.
+'locale' => 'zh-CN',
+.
+.
+.
+```
+
+再看一下效果：
+
+[![](https://iocaffcdn.phphub.org/uploads/images/201806/01/5320/RLBf9VJyJm.png?imageView2/2/w/1240/h/0 "file")](https://iocaffcdn.phphub.org/uploads/images/201806/01/5320/RLBf9VJyJm.png?imageView2/2/w/1240/h/0)
+
+可以看到大部分都已经是中文了，但是字段名称有部分还是英文，我们可以在`UserAddressRequest`类中定义`attributes()`方法来指定字段的名称：
+
+_app/Http/Requests/UserAddressRequest.php_
+
+```
+.
+.
+.
+    public function attributes()
+    {
+        return [
+            'province'      => '省',
+            'city'          => '城市',
+            'district'      => '地区',
+            'address'       => '详细地址',
+            'zip'           => '邮编',
+            'contact_name'  => '姓名',
+            'contact_phone' => '电话',
+        ];
+    }
+```
+
+再次提交表单：
+
+[![](https://iocaffcdn.phphub.org/uploads/images/201806/01/5320/VZUXFLM1Bk.png?imageView2/2/w/1240/h/0 "file")](https://iocaffcdn.phphub.org/uploads/images/201806/01/5320/VZUXFLM1Bk.png?imageView2/2/w/1240/h/0)
+
+最后我们提交一个正常的表单：
+
+[![](https://iocaffcdn.phphub.org/uploads/images/201806/01/5320/5zweUw6A7h.png?imageView2/2/w/1240/h/0 "file")](https://iocaffcdn.phphub.org/uploads/images/201806/01/5320/5zweUw6A7h.png?imageView2/2/w/1240/h/0)
+
+提交之后页面自动跳转到收货地址列表页面：
+
+[![](https://iocaffcdn.phphub.org/uploads/images/201812/20/5320/sHrwinU0lu.png!large "file")](https://iocaffcdn.phphub.org/uploads/images/201812/20/5320/sHrwinU0lu.png!large)
+
+可以看到新添加的地址了。
+
+## 5. 添加入口
+
+接下来我们在收货地址列表页面添加一下这个页面的入口：
+
+_resources/views/user\_addresses/index.blade.php_
+
+```
+.
+.
+.
+    <div class="card-header">
+      收货地址列表
+      <a href="{{ route('user_addresses.create') }}" class="float-right">新增收货地址</a>
+    </div>
+.
+.
+.
+```
+
+进入收货地址列表页面看看效果：
+
+[![](https://iocaffcdn.phphub.org/uploads/images/201812/20/5320/Sx3IARDgg7.png!large "file")](https://iocaffcdn.phphub.org/uploads/images/201812/20/5320/Sx3IARDgg7.png!large)
+
+## Git 代码版本控制
+
+接着让我们将这些文件加入到版本控制中：
+
+```
+$ git add -A
+$ git commit -m "新增收货地址"
+```
+
+
+
