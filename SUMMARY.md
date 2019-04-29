@@ -16,7 +16,7 @@
   * [2.1. 开发环境  免费](di-er-7ae0-wu-tai-bu-zhi/21-kai-fa-huan-jing-mian-fei.md)
   * [2.2. 需求分析 免费](di-er-7ae0-wu-tai-bu-zhi/22-xu-qiu-fen-xi-mian-fei.md)
   * [2.3. 开发思路 免费](di-er-7ae0-wu-tai-bu-zhi/23-kai-fa-si-lu-mian-fei.md)
-  * 2.4. 创建应用
+  * [2.4. 创建应用](di-er-7ae0-wu-tai-bu-zhi/24-chuang-jian-ying-yong.md)
   * 2.5. 辅助函数
   * 2.6. 基础布局
   * 2.7. 小结
