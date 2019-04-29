@@ -22,7 +22,7 @@
   * [2.7. 小结](di-er-7ae0-wu-tai-bu-zhi/27-xiao-jie.md)
 * [第三章. 用户模块](di-san-7ae0-yong-hu-mo-kuai.md)
   * [3.1. 注册与登录](di-san-7ae0-yong-hu-mo-kuai/31-zhu-ce-yu-deng-lu.md)
-  * 3.2. 验证邮箱
+  * [3.2. 验证邮箱](di-san-7ae0-yong-hu-mo-kuai/32-yan-zheng-you-xiang.md)
   * 3.3. 收货地址列表
   * 3.4. 新建收货地址
   * 3.5. 修改和删除收货地址
