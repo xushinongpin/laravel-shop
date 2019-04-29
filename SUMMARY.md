@@ -19,7 +19,7 @@
   * [2.4. 创建应用](di-er-7ae0-wu-tai-bu-zhi/24-chuang-jian-ying-yong.md)
   * [2.5. 辅助函数](di-er-7ae0-wu-tai-bu-zhi/25-fu-zhu-han-shu.md)
   * [2.6. 基础布局](di-er-7ae0-wu-tai-bu-zhi/26-ji-chu-bu-ju.md)
-  * 2.7. 小结
+  * [2.7. 小结](di-er-7ae0-wu-tai-bu-zhi/27-xiao-jie.md)
 * [第三章. 用户模块](di-san-7ae0-yong-hu-mo-kuai.md)
   * 3.1. 注册与登录
   * 3.2. 验证邮箱
