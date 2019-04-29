@@ -1,3 +1,6 @@
-# My Awesome API
+# 电商实战
 
-This file file serves as your book's preface, a great place to describe your book's content and ideas.
+为学习而战
+
+github [备份地址](https://github.com/xushinongpin/laravel-shop)
+
