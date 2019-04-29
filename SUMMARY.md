@@ -31,7 +31,7 @@
   * [4.1. 安装 laravel-admin 扩展包](di-si-7ae0-guan-li-hou-tai/41-an-zhuang-laravel-admin-kuo-zhan-bao.md)
   * [4.2. 用户列表](di-si-7ae0-guan-li-hou-tai/42-yong-hu-lie-biao.md)
   * [4.3. 权限设置](di-si-7ae0-guan-li-hou-tai/43-quan-xian-she-zhi.md)
-  * 4.4. 小结
+  * [4.4. 小结](di-si-7ae0-guan-li-hou-tai/44-xiao-jie.md)
 * [第五章. 商品模块](di-wu-7ae0-shang-pin-mo-kuai.md)
   * 5.1. 商品的数据结构设计
   * 5.2. 后台商品列表
