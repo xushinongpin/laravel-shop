@@ -8,7 +8,7 @@
   * [1.2. 关于作者 免费](methods/12-guan-yu-zuo-zhe-mian-fei.md)
   * [1.3. 践行至上 免费](methods/13-jian-xing-zhi-shang-mian-fei.md)
   * [1.4. 写作约定 免费](methods/14-xie-zuo-yue-ding-mian-fei.md)
-  * 1.5. 发行说明 免费
+  * [1.5. 发行说明 免费](methods/15-fa-xing-shuo-ming-mian-fei.md)
   * 1.6. 本书源码 免费
   * 1.7. 遇到问题怎么办？ 免费
   * 1.8. 常见问题 免费
