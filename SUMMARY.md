@@ -11,7 +11,7 @@
   * [1.5. 发行说明 免费](methods/15-fa-xing-shuo-ming-mian-fei.md)
   * [1.6. 本书源码 免费](methods/16-ben-shu-yuan-ma-mian-fei.md)
   * [1.7. 遇到问题怎么办？ 免费](methods/17-yu-dao-wen-ti-zen-yao-ban-ff1f-mian-fei.md)
-  * 1.8. 常见问题 免费
+  * [1.8. 常见问题 免费](methods/18-chang-jian-wen-ti-mian-fei.md)
 * [第二章. 舞台布置](di-er-7ae0-wu-tai-bu-zhi.md)
   * 2.1. 开发环境  免费
   * 2.2. 需求分析 免费
