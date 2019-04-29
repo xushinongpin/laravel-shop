@@ -6,7 +6,7 @@
 * [ 第一章. 基础信息](methods.md)
   * [1.1. 序言 免费](methods/11-xu-yan-mian-fei.md)
   * [1.2. 关于作者 免费](methods/12-guan-yu-zuo-zhe-mian-fei.md)
-  * 1.3. 践行至上 免费
+  * [1.3. 践行至上 免费](methods/13-jian-xing-zhi-shang-mian-fei.md)
   * 1.4. 写作约定 免费
   * 1.5. 发行说明 免费
   * 1.6. 本书源码 免费
