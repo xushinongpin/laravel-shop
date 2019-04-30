@@ -4,9 +4,11 @@
 
 github [备份地址](https://github.com/xushinongpin/laravel-shop)
 
+# [**laravel初学笔记**](https://laravel.lvtian.vip)        
 
+# [learnku开发实战进阶](https://learnku-2.ilvtian.vip/)
 
-# [**laravel初学笔记**](https://laravel.lvtian.vip)      [learnku电商实战](/learnku-shop.ilvtian.vip)     
+# [learnku电商实战 ](https://learnku-shop.ilvtian.vip/)
 
 
 
