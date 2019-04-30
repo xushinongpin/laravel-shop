@@ -60,7 +60,7 @@
   * [7.4. 集成微信支付](di-qi-7ae0-zhi-fu-mo-kuai/74-ji-cheng-wei-xin-zhi-fu.md)
   * [7.5. 订单的微信支付](di-qi-7ae0-zhi-fu-mo-kuai/75-ding-dan-de-wei-xin-zhi-fu.md)
   * [7.6. 完善支付后逻辑](di-qi-7ae0-zhi-fu-mo-kuai/76-wan-shan-zhi-fu-hou-luo-ji.md)
-  * 7.7. 小结
+  * [7.7. 小结](di-qi-7ae0-zhi-fu-mo-kuai/77-xiao-jie.md)
 * [第八章. 完善订单模块](di-ba-7ae0-wan-shan-ding-dan-mo-kuai.md)
   * 8.1. 管理后台 - 订单列表
   * 8.2. 管理后台 - 订单详情
