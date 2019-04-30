@@ -42,7 +42,7 @@
   * [5.7. 优雅地处理异常](di-wu-7ae0-shang-pin-mo-kuai/57-you-ya-di-chu-li-yi-chang.md)
   * [5.8. 收藏商品](di-wu-7ae0-shang-pin-mo-kuai/58-shou-cang-shang-pin.md)
   * [5.9. 收藏商品列表](di-wu-7ae0-shang-pin-mo-kuai/59-shou-cang-shang-pin-lie-biao.md)
-  * 5.10. 小结
+  * [5.10. 小结](di-wu-7ae0-shang-pin-mo-kuai/510-xiao-jie.md)
 * [第六章. 购物车 & 订单模块](di-liu-7ae0-gou-wu-che-and-ding-dan-mo-kuai.md)
   * 6.1. 添加商品到购物车
   * 6.2. 查看购物车
