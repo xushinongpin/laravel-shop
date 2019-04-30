@@ -46,7 +46,7 @@
 * [第六章. 购物车 & 订单模块](di-liu-7ae0-gou-wu-che-and-ding-dan-mo-kuai.md)
   * [6.1. 添加商品到购物车](di-liu-7ae0-gou-wu-che-and-ding-dan-mo-kuai/61-tian-jia-shang-pin-dao-gou-wu-che.md)
   * [6.2. 查看购物车](di-liu-7ae0-gou-wu-che-and-ding-dan-mo-kuai/62-cha-kan-gou-wu-che.md)
-  * 6.3. 订单的数据模型
+  * [6.3. 订单的数据模型](di-liu-7ae0-gou-wu-che-and-ding-dan-mo-kuai/63-ding-dan-de-shu-ju-mo-xing.md)
   * 6.4. 购物车下单页面
   * 6.5. 关闭未支付订单
   * 6.6. 用户订单列表
