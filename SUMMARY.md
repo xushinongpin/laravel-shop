@@ -44,7 +44,7 @@
   * [5.9. 收藏商品列表](di-wu-7ae0-shang-pin-mo-kuai/59-shou-cang-shang-pin-lie-biao.md)
   * [5.10. 小结](di-wu-7ae0-shang-pin-mo-kuai/510-xiao-jie.md)
 * [第六章. 购物车 & 订单模块](di-liu-7ae0-gou-wu-che-and-ding-dan-mo-kuai.md)
-  * 6.1. 添加商品到购物车
+  * [6.1. 添加商品到购物车](di-liu-7ae0-gou-wu-che-and-ding-dan-mo-kuai/61-tian-jia-shang-pin-dao-gou-wu-che.md)
   * 6.2. 查看购物车
   * 6.3. 订单的数据模型
   * 6.4. 购物车下单页面
