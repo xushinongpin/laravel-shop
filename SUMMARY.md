@@ -50,7 +50,7 @@
   * [6.4. 购物车下单页面](di-liu-7ae0-gou-wu-che-and-ding-dan-mo-kuai/64-gou-wu-che-xia-dan-ye-mian.md)
   * [6.5. 关闭未支付订单](di-liu-7ae0-gou-wu-che-and-ding-dan-mo-kuai/65-guan-bi-wei-zhi-fu-ding-dan.md)
   * [6.6. 用户订单列表](di-liu-7ae0-gou-wu-che-and-ding-dan-mo-kuai/66-yong-hu-ding-dan-lie-biao.md)
-  * 6.7. 用户订单详情页
+  * [6.7. 用户订单详情页](di-liu-7ae0-gou-wu-che-and-ding-dan-mo-kuai/67-yong-hu-ding-dan-xiang-qing-ye.md)
   * 6.8. 封装业务代码
   * 6.9. 小结
 * [第七章. 支付模块](di-qi-7ae0-zhi-fu-mo-kuai.md)
