@@ -52,7 +52,7 @@
   * [6.6. 用户订单列表](di-liu-7ae0-gou-wu-che-and-ding-dan-mo-kuai/66-yong-hu-ding-dan-lie-biao.md)
   * [6.7. 用户订单详情页](di-liu-7ae0-gou-wu-che-and-ding-dan-mo-kuai/67-yong-hu-ding-dan-xiang-qing-ye.md)
   * [6.8. 封装业务代码](di-liu-7ae0-gou-wu-che-and-ding-dan-mo-kuai/68-feng-zhuang-ye-wu-dai-ma.md)
-  * 6.9. 小结
+  * [6.9. 小结](di-liu-7ae0-gou-wu-che-and-ding-dan-mo-kuai/69-xiao-jie.md)
 * [第七章. 支付模块](di-qi-7ae0-zhi-fu-mo-kuai.md)
   * 7.1. 安装扩展包 yansongda/pay
   * 7.2. 集成支付宝
