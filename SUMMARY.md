@@ -45,7 +45,7 @@
   * [5.10. 小结](di-wu-7ae0-shang-pin-mo-kuai/510-xiao-jie.md)
 * [第六章. 购物车 & 订单模块](di-liu-7ae0-gou-wu-che-and-ding-dan-mo-kuai.md)
   * [6.1. 添加商品到购物车](di-liu-7ae0-gou-wu-che-and-ding-dan-mo-kuai/61-tian-jia-shang-pin-dao-gou-wu-che.md)
-  * 6.2. 查看购物车
+  * [6.2. 查看购物车](di-liu-7ae0-gou-wu-che-and-ding-dan-mo-kuai/62-cha-kan-gou-wu-che.md)
   * 6.3. 订单的数据模型
   * 6.4. 购物车下单页面
   * 6.5. 关闭未支付订单
