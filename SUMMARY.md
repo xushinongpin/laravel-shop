@@ -54,7 +54,7 @@
   * [6.8. 封装业务代码](di-liu-7ae0-gou-wu-che-and-ding-dan-mo-kuai/68-feng-zhuang-ye-wu-dai-ma.md)
   * [6.9. 小结](di-liu-7ae0-gou-wu-che-and-ding-dan-mo-kuai/69-xiao-jie.md)
 * [第七章. 支付模块](di-qi-7ae0-zhi-fu-mo-kuai.md)
-  * 7.1. 安装扩展包 yansongda/pay
+  * [7.1. 安装扩展包 yansongda/pay](di-qi-7ae0-zhi-fu-mo-kuai/71-an-zhuang-kuo-zhan-bao-yansongda-pay.md)
   * 7.2. 集成支付宝
   * 7.3. 订单的支付宝支付
   * 7.4. 集成微信支付
