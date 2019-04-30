@@ -48,7 +48,7 @@
   * [6.2. 查看购物车](di-liu-7ae0-gou-wu-che-and-ding-dan-mo-kuai/62-cha-kan-gou-wu-che.md)
   * [6.3. 订单的数据模型](di-liu-7ae0-gou-wu-che-and-ding-dan-mo-kuai/63-ding-dan-de-shu-ju-mo-xing.md)
   * [6.4. 购物车下单页面](di-liu-7ae0-gou-wu-che-and-ding-dan-mo-kuai/64-gou-wu-che-xia-dan-ye-mian.md)
-  * 6.5. 关闭未支付订单
+  * [6.5. 关闭未支付订单](di-liu-7ae0-gou-wu-che-and-ding-dan-mo-kuai/65-guan-bi-wei-zhi-fu-ding-dan.md)
   * 6.6. 用户订单列表
   * 6.7. 用户订单详情页
   * 6.8. 封装业务代码
