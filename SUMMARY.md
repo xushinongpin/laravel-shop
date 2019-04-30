@@ -36,7 +36,7 @@
   * [5.1. 商品的数据结构设计](di-wu-7ae0-shang-pin-mo-kuai/51-shang-pin-de-shu-ju-jie-gou-she-ji.md)
   * [5.2. 后台商品列表](di-wu-7ae0-shang-pin-mo-kuai/52-hou-tai-shang-pin-lie-biao.md)
   * [5.3. 后台创建和编辑商品](di-wu-7ae0-shang-pin-mo-kuai/53-hou-tai-chuang-jian-he-bian-ji-shang-pin.md)
-  * 5.4. 商品列表页面
+  * [5.4. 商品列表页面](di-wu-7ae0-shang-pin-mo-kuai/54-shang-pin-lie-biao-ye-mian.md)
   * 5.5. 商品筛选、排序
   * 5.6. 商品详情页
   * 5.7. 优雅地处理异常
