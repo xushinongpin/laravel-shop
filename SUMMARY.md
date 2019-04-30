@@ -63,7 +63,7 @@
   * [7.7. 小结](di-qi-7ae0-zhi-fu-mo-kuai/77-xiao-jie.md)
 * [第八章. 完善订单模块](di-ba-7ae0-wan-shan-ding-dan-mo-kuai.md)
   * [8.1. 管理后台 - 订单列表](di-ba-7ae0-wan-shan-ding-dan-mo-kuai/81-guan-li-hou-tai-ding-dan-lie-biao.md)
-  * 8.2. 管理后台 - 订单详情
+  * [8.2. 管理后台 - 订单详情](di-ba-7ae0-wan-shan-ding-dan-mo-kuai/82-guan-li-hou-tai-ding-dan-xiang-qing.md)
   * 8.3. 管理后台 - 订单发货
   * 8.4. 用户界面 - 确认收货
   * 8.5. 评价商品
