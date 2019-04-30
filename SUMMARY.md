@@ -39,7 +39,7 @@
   * [5.4. 商品列表页面](di-wu-7ae0-shang-pin-mo-kuai/54-shang-pin-lie-biao-ye-mian.md)
   * [5.5. 商品筛选、排序](di-wu-7ae0-shang-pin-mo-kuai/55-shang-pin-shai-xuan-3001-pai-xu.md)
   * [5.6. 商品详情页](di-wu-7ae0-shang-pin-mo-kuai/56-shang-pin-xiang-qing-ye.md)
-  * 5.7. 优雅地处理异常
+  * [5.7. 优雅地处理异常](di-wu-7ae0-shang-pin-mo-kuai/57-you-ya-di-chu-li-yi-chang.md)
   * 5.8. 收藏商品
   * 5.9. 收藏商品列表
   * 5.10. 小结
