@@ -57,7 +57,7 @@
   * [7.1. 安装扩展包 yansongda/pay](di-qi-7ae0-zhi-fu-mo-kuai/71-an-zhuang-kuo-zhan-bao-yansongda-pay.md)
   * [7.2. 集成支付宝](di-qi-7ae0-zhi-fu-mo-kuai/72-ji-cheng-zhi-fu-bao.md)
   * [7.3. 订单的支付宝支付](di-qi-7ae0-zhi-fu-mo-kuai/73-ding-dan-de-zhi-fu-bao-zhi-fu.md)
-  * 7.4. 集成微信支付
+  * [7.4. 集成微信支付](di-qi-7ae0-zhi-fu-mo-kuai/74-ji-cheng-wei-xin-zhi-fu.md)
   * 7.5. 订单的微信支付
   * 7.6. 完善支付后逻辑
   * 7.7. 小结
