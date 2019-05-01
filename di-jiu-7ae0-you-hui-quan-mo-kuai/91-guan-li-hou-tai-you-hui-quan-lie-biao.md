@@ -172,5 +172,89 @@ _app/Models/Order.php_
 $ php artisan migrate
 ```
 
+## 3. 创建控制器
 
+接下来我们要创建一个管理后台的控制器，使用`admin:make`来自动生成：
+
+```
+$ php artisan admin:make CouponCodesController --model=App\\Models\\CouponCode
+```
+
+本章节要实现的是优惠券列表，因此只需要关注`index()`和`grid()`两个方法：
+
+_app/Admin/Controllers/CouponCodesController.php_
+
+```
+.
+.
+.
+    public function index(Content $content)
+    {
+        return $content
+            ->header('优惠券列表')
+            ->body($this->grid());
+    }
+    .
+    .
+    .
+    protected function grid()
+    {
+        $grid = new Grid(new CouponCode);
+
+        // 默认按创建时间倒序排序
+        $grid->model()->orderBy('created_at', 'desc');
+        $grid->id('ID')->sortable();
+        $grid->name('名称');
+        $grid->code('优惠码');
+        $grid->type('类型')->display(function($value) {
+            return CouponCode::$typeMap[$value];
+        });
+        // 根据不同的折扣类型用对应的方式来展示
+        $grid->value('折扣')->display(function($value) {
+            return $this->type === CouponCode::TYPE_FIXED ? '￥'.$value : $value.'%';
+        });
+        $grid->min_amount('最低金额');
+        $grid->total('总量');
+        $grid->used('已用');
+        $grid->enabled('是否启用')->display(function($value) {
+            return $value ? '是' : '否';
+        });
+        $grid->created_at('创建时间');
+
+        $grid->actions(function ($actions) {
+            $actions->disableView();
+        });
+
+        return $grid;
+    }
+.
+.
+.
+```
+
+在后台我们不需要优惠券详情页，因此删除`show()`和`detail()`两个方法。
+
+## 4. 添加路由
+
+然后添加对应路由：
+
+_app/Admin/routes.php_
+
+```
+$router->get('coupon_codes', 'CouponCodesController@index');
+```
+
+## 5. 添加后台菜单
+
+接下来我们要添加管理后台的菜单，点击左侧的`系统管理`-&gt;`菜单`菜单，然后按下图填写：
+
+[![](https://iocaffcdn.phphub.org/uploads/images/201805/30/5320/o5FuHJX9aZ.png?imageView2/2/w/1240/h/0 "file")](https://iocaffcdn.phphub.org/uploads/images/201805/30/5320/o5FuHJX9aZ.png?imageView2/2/w/1240/h/0)
+
+点击`提交`按钮来保存，然后重新排序：
+
+[![](https://iocaffcdn.phphub.org/uploads/images/201805/30/5320/ta2GP9TqJT.png?imageView2/2/w/1240/h/0 "file")](https://iocaffcdn.phphub.org/uploads/images/201805/30/5320/ta2GP9TqJT.png?imageView2/2/w/1240/h/0)
+
+点击`保存`按钮，刷新页面，然后点击左侧菜单的`优惠券管理`：
+
+[![](https://iocaffcdn.phphub.org/uploads/images/201812/23/5320/JMDRUHm07L.png!large "file")](https://iocaffcdn.phphub.org/uploads/images/201812/23/5320/JMDRUHm07L.png!large)
 
