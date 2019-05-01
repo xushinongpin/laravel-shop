@@ -38,7 +38,9 @@
 ```
 $ mysqldump -t laravel-shop admin_menu admin_permissions admin_role_menu admin_role_permissions admin_role_users admin_roles admin_user_permissions admin_users > database/admin.sql
 
-$ mysqldump -t laravel-shop admin_menu admin_permissions admin_role_menu admin_role_permissions admin_role_users admin_roles admin_user_permissions admin_users -u root -p ee19c18f54> database/admin.sql
+windows执行
+E:\me\laravel-shop>mysqldump -t laravel-shop admin_menu admin_permissions admin_role_menu admin_role_permissions admin_role_users admin_roles admin_user_permissions admin_users -u root -p> database/admin.sql
+Enter password: **********
 ```
 
 命令解析：
@@ -48,7 +50,7 @@ $ mysqldump -t laravel-shop admin_menu admin_permissions admin_role_menu admin_r
 * `laravel-shop`
   代表我们要导出的数据库名称，后面则是要导出的表列表；
 * `>`
-  ` database/admin.sql`
+  `database/admin.sql`
   把导出的内容保存到
   `database/admin.sql`
   文件中。
