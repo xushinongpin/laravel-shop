@@ -1,0 +1,176 @@
+[![](https://iocaffcdn.phphub.org/uploads/images/201806/13/1/XHjhRU2GWh.jpeg?imageView2/2/w/1240/h/0 "file")](https://iocaffcdn.phphub.org/uploads/images/201806/13/1/XHjhRU2GWh.jpeg?imageView2/2/w/1240/h/0)
+
+## 优惠券
+
+优惠券模块是电商系统里一个重要的模块。本章节将要实现优惠券的数据库表创建并在管理后台查看优惠券列表。
+
+## 1. 整理字段
+
+在创建数据库表之前，我们需要先分析一下优惠券的表应该有哪些字段：
+
+| 字段名称 | 描述 | 类型 | 加索引缘由 |
+| :--- | :--- | :--- | :--- |
+| id | 自增长 ID | unsigned big int | 主键 |
+| name | 优惠券的标题 | varchar | 无 |
+| code | 优惠码，用户下单时输入 | varchar | 唯一 |
+| type | 优惠券类型，支持固定金额和百分比折扣 | varchar | 无 |
+| value | 折扣值，根据不同类型含义不同 | decimal | 无 |
+| total | 全站可兑换的数量 | unsigned int | 无 |
+| used | 当前已兑换的数量 | unsigned int, default 0 | 无 |
+| min\_amount | 使用该优惠券的最低订单金额 | decimal | 无 |
+| not\_before | 在这个时间之前不可用 | datetime, null | 无 |
+| not\_after | 在这个时间之后不可用 | datetime, null | 无 |
+| enabled | 优惠券是否生效 | tinyint | 无 |
+
+## 2. 创建模型
+
+接下来我们创建一个`CouponCode`模型：
+
+```
+$ php artisan make:model Models/CouponCode -mf
+```
+
+根据上面整理好的字段修改数据库迁移文件：
+
+_database/migrations/&lt; your\_date &gt;\_create\_coupon\_codes\_table.php_
+
+```
+.
+.
+.
+    public function up()
+    {
+        Schema::create('coupon_codes', function (Blueprint $table) {
+            $table->bigIncrements('id');
+            $table->string('name');
+            $table->string('code')->unique();
+            $table->string('type');
+            $table->decimal('value');
+            $table->unsignedInteger('total');
+            $table->unsignedInteger('used')->default(0);
+            $table->decimal('min_amount', 10, 2);
+            $table->datetime('not_before')->nullable();
+            $table->datetime('not_after')->nullable();
+            $table->boolean('enabled');
+            $table->timestamps();
+        });
+    }
+```
+
+然后修改模型文件，加入一些必要的字段信息：
+
+_app/Models/CouponCode.php_
+
+```
+<?php
+
+namespace App\Models;
+
+use Illuminate\Database\Eloquent\Model;
+
+class CouponCode extends Model
+{
+    // 用常量的方式定义支持的优惠券类型
+    const TYPE_FIXED = 'fixed';
+    const TYPE_PERCENT = 'percent';
+
+    public static $typeMap = [
+        self::TYPE_FIXED   => '固定金额',
+        self::TYPE_PERCENT => '比例',
+    ];
+
+    protected $fillable = [
+        'name',
+        'code',
+        'type',
+        'value',
+        'total',
+        'used',
+        'min_amount',
+        'not_before',
+        'not_after',
+        'enabled',
+    ];
+    protected $casts = [
+        'enabled' => 'boolean',
+    ];
+    // 指明这两个字段是日期类型
+    protected $dates = ['not_before', 'not_after'];
+}
+```
+
+同时我们还需要修改`orders`表，在里面添加一个`coupon_code_id`字段。
+
+创建一个数据库迁移文件：
+
+```
+$ php artisan make:migration orders_add_coupon_code_id --table=orders
+```
+
+_database/migrations/&lt; your\_date &gt;\_orders\_add\_coupon\_code\_id.php_
+
+```
+.
+.
+.
+    public function up()
+    {
+        Schema::table('orders', function (Blueprint $table) {
+            $table->unsignedBigInteger('coupon_code_id')->nullable()->after('paid_at');
+            $table->foreign('coupon_code_id')->references('id')->on('coupon_codes')->onDelete('set null');
+        });
+    }
+
+    public function down()
+    {
+        Schema::table('orders', function (Blueprint $table) {
+            $table->dropForeign(['coupon_code_id']);
+            $table->dropColumn('coupon_code_id');
+        });
+    }
+```
+
+代码解析：
+
+* `onDelete('set null')`
+  代表如果这个订单有关联优惠券并且该优惠券被删除时将自动把
+  `coupon_code_id`
+  设成
+  `null`
+  。我们不能因为删除了优惠券就把关联了这个优惠券的订单都删除了，这是绝对不允许的。
+* `dropForeign()`
+  删除外键关联，要早于
+  `dropColumn()`
+  删除字段调用，否则数据库会报错。
+* `dropForeign()`
+  方法的参数可以是字符串也可以是一个数组，如果是字符串则代表删除外键名为该字符串的外键，而如果是数组的话则会删除该数组中字段所对应的外键。我们这个
+  `coupon_code_id`
+  字段默认的外键名是
+  `orders_coupon_code_id_foreign`
+  ，因此需要通过数组的方式来删除。
+
+接下来是在`Order`模型中新增与`CouponCode`的关联关系：
+
+_app/Models/Order.php_
+
+```
+.
+.
+.
+    public function couponCode()
+    {
+        return $this->belongsTo(CouponCode::class);
+    }
+.
+.
+.
+```
+
+最后执行数据库迁移：
+
+```
+$ php artisan migrate
+```
+
+
+
