@@ -75,7 +75,7 @@
 * [第九章. 优惠券模块](di-jiu-7ae0-you-hui-quan-mo-kuai.md)
   * [9.1. 管理后台 - 优惠券列表](di-jiu-7ae0-you-hui-quan-mo-kuai/91-guan-li-hou-tai-you-hui-quan-lie-biao.md)
   * [9.2. 管理后台 - 添加、修改、删除优惠券](di-jiu-7ae0-you-hui-quan-mo-kuai/92-guan-li-hou-tai-tian-jia-3001-xiu-gai-3001-shan-chu-you-hui-quan.md)
-  * 9.3. 用户界面 - 检查优惠券
+  * [9.3. 用户界面 - 检查优惠券](di-jiu-7ae0-you-hui-quan-mo-kuai/93-yong-hu-jie-mian-jian-cha-you-hui-quan.md)
   * 9.4. 用户界面 - 使用优惠券下单
   * 9.5. 优化优惠券模块
   * 9.6. 小结
