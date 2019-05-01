@@ -80,7 +80,7 @@
   * [9.5. 优化优惠券模块](di-jiu-7ae0-you-hui-quan-mo-kuai/95-you-hua-you-hui-quan-mo-kuai.md)
   * [9.6. 小结](di-jiu-7ae0-you-hui-quan-mo-kuai/96-xiao-jie.md)
 * [第十章. 杂项](di-shi-7ae0-za-xiang.md)
-  * 10.1. 配置后台权限
+  * [10.1. 配置后台权限](di-shi-7ae0-za-xiang/101-pei-zhi-hou-tai-quan-xian.md)
   * 10.2. 完善假数据填充
   * 10.3. 备份管理后台数据
   * 10.4. 系统安全
