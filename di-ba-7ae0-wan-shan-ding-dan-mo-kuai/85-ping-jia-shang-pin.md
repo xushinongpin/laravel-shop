@@ -403,7 +403,7 @@ class UpdateProductRating implements ShouldQueue
 }
 ```
 
-重点看一下`first()`方法，`first()`方法接受一个数组作为参数，代表此次 SQL 要查询出来的字段，默认情况下 Laravel 会给数组里面的值的两边加上`````这个符号，比如`first(['name', 'email'])`生成的 SQL 会类似：
+重点看一下`first()`方法，`first()`方法接受一个数组作为参数，代表此次 SQL 要查询出来的字段，默认情况下 Laravel 会给数组里面的值的两边加上`````````这个符号，比如`````first\(\['name', 'email'\]\)\`生成的 SQL 会类似：
 
     select `name`, `email` from xxx
 
@@ -472,4 +472,124 @@ use App\Events\OrderReviewed;
 [![](https://iocaffcdn.phphub.org/uploads/images/201812/23/5320/QEn9ftfyKv.png!large "file")](https://iocaffcdn.phphub.org/uploads/images/201812/23/5320/QEn9ftfyKv.png!large)
 
 评分 4，评价数 2，符合我们的情况。
+
+
+
+## 6. 添加入口
+
+接下来我们要把评价的入口放在订单列表页面：
+
+_resources/views/orders/index.blade.php_
+
+```
+.
+.
+.
+<td rowspan="{{ count($order->items) }}" class="text-center">
+  <a class="btn btn-primary btn-sm" href="{{ route('orders.show', ['order' => $order->id]) }}">查看订单</a>
+  <!-- 评价入口开始 -->
+  @if($order->paid_at)
+  <a class="btn btn-success btn-sm" href="{{ route('orders.review.show', ['order' => $order->id]) }}">
+  {{ $order->reviewed ? '查看评价' : '评价' }}
+  </a>
+  @endif
+  <!-- 评价入口结束 -->
+</td>
+.
+.
+.
+```
+
+访问订单列表查看效果：
+
+[![](https://iocaffcdn.phphub.org/uploads/images/201812/23/5320/FKyPQlQAqD.png!large "file")](https://iocaffcdn.phphub.org/uploads/images/201812/23/5320/FKyPQlQAqD.png!large)
+
+## 7. 在商品页展示
+
+我们在写商品展示页面的时候预留了商品评价的列表，现在来填充这个地方。
+
+首先在控制器里加载评价：
+
+_app/Http/Controllers/ProductsController.php_
+
+```
+use App\Models\OrderItem;
+.
+.
+.
+    public function show(Product $product, Request $request)
+    {
+        .
+        .
+        .
+        $reviews = OrderItem::query()
+            ->with(['order.user', 'productSku']) // 预先加载关联关系
+            ->where('product_id', $product->id)
+            ->whereNotNull('reviewed_at') // 筛选出已评价的
+            ->orderBy('reviewed_at', 'desc') // 按评价时间倒序
+            ->limit(10) // 取出 10 条
+            ->get();
+
+        // 最后别忘了注入到模板中
+        return view('products.show', [
+            'product' => $product,
+            'favored' => $favored,
+            'reviews' => $reviews
+        ]);
+    }
+```
+
+然后在商品详情页的模板中循环展示：
+
+_resources/views/products/show.blade.php_
+
+```
+.
+.
+.
+<div role="tabpanel" class="tab-pane" id="product-reviews-tab">
+  <!-- 评论列表开始 -->
+  <table class="table table-bordered table-striped">
+    <thead>
+    <tr>
+      <td>用户</td>
+      <td>商品</td>
+      <td>评分</td>
+      <td>评价</td>
+      <td>时间</td>
+    </tr>
+    </thead>
+    <tbody>
+      @foreach($reviews as $review)
+      <tr>
+        <td>{{ $review->order->user->name }}</td>
+        <td>{{ $review->productSku->title }}</td>
+        <td>{{ str_repeat('★', $review->rating) }}{{ str_repeat('☆', 5 - $review->rating) }}</td>
+        <td>{{ $review->review }}</td>
+        <td>{{ $review->reviewed_at->format('Y-m-d H:i') }}</td>
+      </tr>
+      @endforeach
+    </tbody>
+  </table>
+  <!-- 评论列表结束 -->
+</div>
+.
+.
+.
+```
+
+现在进到商品详情页看看效果：
+
+[![](https://iocaffcdn.phphub.org/uploads/images/201812/23/5320/M1Te94YvVp.png!large "file")](https://iocaffcdn.phphub.org/uploads/images/201812/23/5320/M1Te94YvVp.png!large)
+
+## Git 代码版本控制
+
+接着让我们将这些文件加入到版本控制中：
+
+```
+$ git add -A
+$ git commit -m "评价商品"
+```
+
+
 
