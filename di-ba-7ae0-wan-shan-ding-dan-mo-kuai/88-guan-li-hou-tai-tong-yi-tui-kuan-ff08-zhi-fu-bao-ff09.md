@@ -244,5 +244,16 @@ $ git add -A
 $ git commit -m "后台管理 - 同意退款 - 支付宝退款"
 ```
 
+# 私人秘方
+
+1. 报错 cURL error 60: SSL certificate problem: unable to get local issuer certificate \(see http: curl.haxx.se libcurl c libcurl errors.html\)
+
+```
+解决方案
+下载证书：https://curl.haxx.se/ca/cacert.pem
+修改php.ini
+curl.cainfo = D:\BtSoft\WebSoft\php\7.1\cacert.pem
+```
+
 
 
