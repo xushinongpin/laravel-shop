@@ -88,7 +88,7 @@
 * [第十一章. 附录](di-shi-yi-7ae0-fu-lu.md)
   * [11.1. 全书总结](di-shi-yi-7ae0-fu-lu/111-quan-shu-zong-jie.md)
   * [11.2. 电商进阶课程 免费](di-shi-yi-7ae0-fu-lu/112-dian-shang-jin-jie-ke-cheng-mian-fei.md)
-  * 11.3. 下一步学习建议
+  * [11.3. 下一步学习建议](di-shi-yi-7ae0-fu-lu/113-xia-yi-bu-xue-xi-jian-yi.md)
   * 11.4. 作品分享和学习感悟
 
 ## Methods
