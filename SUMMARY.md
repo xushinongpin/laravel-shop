@@ -66,7 +66,7 @@
   * [8.2. 管理后台 - 订单详情](di-ba-7ae0-wan-shan-ding-dan-mo-kuai/82-guan-li-hou-tai-ding-dan-xiang-qing.md)
   * [8.3. 管理后台 - 订单发货](di-ba-7ae0-wan-shan-ding-dan-mo-kuai/83-guan-li-hou-tai-ding-dan-fa-huo.md)
   * [8.4. 用户界面 - 确认收货](di-ba-7ae0-wan-shan-ding-dan-mo-kuai/84-yong-hu-jie-mian-que-ren-shou-huo.md)
-  * 8.5. 评价商品
+  * [8.5. 评价商品](di-ba-7ae0-wan-shan-ding-dan-mo-kuai/85-ping-jia-shang-pin.md)
   * 8.6. 用户界面 - 申请退款
   * 8.7. 管理后台 - 拒绝退款
   * 8.8. 管理后台 - 同意退款（支付宝）
