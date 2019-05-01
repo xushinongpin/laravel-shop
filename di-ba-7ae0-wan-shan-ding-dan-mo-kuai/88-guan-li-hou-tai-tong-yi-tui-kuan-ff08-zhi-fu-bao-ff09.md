@@ -255,5 +255,7 @@ $ git commit -m "后台管理 - 同意退款 - 支付宝退款"
 curl.cainfo = D:\BtSoft\WebSoft\php\7.1\cacert.pem
 ```
 
+1. [支付宝业务错误文档](https://docs.open.alipay.com/api_1/alipay.trade.refund)
+
 
 
