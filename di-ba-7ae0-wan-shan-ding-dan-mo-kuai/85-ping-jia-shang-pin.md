@@ -308,7 +308,7 @@ _resources/sass/app.scss_
 
 ## 4. 测试
 
-接下来我们测试一下，访问[http://shop.test/orders/{订单 ID}/review](http://shop.test/orders/%7B%E8%AE%A2%E5%8D%95ID%7D/review)：
+接下来我们测试一下，访问[http://shop.test/orders/{订单 ID}/review](http://shop.test/orders/{订单ID}/review)：
 
 [![](https://iocaffcdn.phphub.org/uploads/images/201812/23/5320/t5oXUUOgjM.png!large "file")](https://iocaffcdn.phphub.org/uploads/images/201812/23/5320/t5oXUUOgjM.png!large)
 
@@ -320,6 +320,156 @@ _resources/sass/app.scss_
 
 [![](https://iocaffcdn.phphub.org/uploads/images/201812/23/5320/lNb375uuX4.png!large "file")](https://iocaffcdn.phphub.org/uploads/images/201812/23/5320/lNb375uuX4.png!large)
 
-  
+## 5. 更新商品评分
 
+用户给商品打完分之后，系统需要重新计算对应商品的评分数据，这里我们还是通过事件系统来实现。
+
+首先创建一个订单已评价`OrderReviewed`事件：
+
+```
+$ php artisan make:event OrderReviewed
+```
+
+和订单已支付`OrderPaid`事件一样，只需要包含订单数据即可：
+
+_app/Events/OrderReviewed.php_
+
+```
+use App\Models\Order;
+.
+.
+.
+class OrderReviewed
+{
+    use Dispatchable, InteractsWithSockets, SerializesModels;
+
+    protected $order;
+
+    public function __construct(Order $order)
+    {
+        $this->order = $order;
+    }
+
+    public function getOrder()
+    {
+        return $this->order;
+    }
+}
+```
+
+接下来创建对应的事件监听器`UpdateProductRating`：
+
+```
+$ php artisan make:listener UpdateProductRating --event=OrderReviewed
+```
+
+_app/Listeners/UpdateProductRating.php_
+
+```
+<?php
+
+namespace App\Listeners;
+
+use DB;
+use App\Models\OrderItem;
+use App\Events\OrderReviewed;
+use Illuminate\Queue\InteractsWithQueue;
+use Illuminate\Contracts\Queue\ShouldQueue;
+
+// implements ShouldQueue 代表这个事件处理器是异步的
+class UpdateProductRating implements ShouldQueue
+{
+    public function handle(OrderReviewed $event)
+    {
+        // 通过 with 方法提前加载数据，避免 N + 1 性能问题
+        $items = $event->getOrder()->items()->with(['product'])->get();
+        foreach ($items as $item) {
+            $result = OrderItem::query()
+                ->where('product_id', $item->product_id)
+                ->whereHas('order', function ($query) {
+                    $query->whereNotNull('paid_at');
+                })
+                ->first([
+                    DB::raw('count(*) as review_count'),
+                    DB::raw('avg(rating) as rating')
+                ]);
+            // 更新商品的评分和评价数
+            $item->product->update([
+                'rating'       => $result->rating,
+                'review_count' => $result->review_count,
+            ]);
+        }
+    }
+}
+```
+
+重点看一下`first()`方法，`first()`方法接受一个数组作为参数，代表此次 SQL 要查询出来的字段，默认情况下 Laravel 会给数组里面的值的两边加上`````这个符号，比如`first(['name', 'email'])`生成的 SQL 会类似：
+
+    select `name`, `email` from xxx
+
+所以如果我们直接传入`first(['count(*) as review_count', 'avg(rating) as rating'])`，最后生成的 SQL 肯定是不正确的。这里我们用`DB::raw()`方法来解决这个问题，Laravel 在构建 SQL 的时候如果遇到`DB::raw()`就会把`DB::raw()`的参数原样拼接到 SQL 里。
+
+接下来在`EventServiceProvider`注册事件和处理的关联：
+
+_app/Providers/EventServiceProvider.php_
+
+```
+use App\Events\OrderReviewed;
+use App\Listeners\UpdateProductRating;
+.
+.
+.
+    protected $listen = [
+        .
+        .
+        .
+        OrderReviewed::class => [
+            UpdateProductRating::class,
+        ],
+    ];
+```
+
+最后我们在控制器里触发这个事件：
+
+_app/Http/Controllers/OrdersController.php_
+
+```
+use App\Events\OrderReviewed;
+.
+.
+.
+    public function sendReview(Order $order, SendReviewRequest $request)
+    {
+        .
+        .
+        .
+        \DB::transaction(function () use ($reviews, $order) {
+            .
+            .
+            .
+            event(new OrderReviewed($order));
+        });
+        .
+        .
+        .
+    }
+```
+
+接下来我们测试一下这个事件和对应的处理器。
+
+> 别忘记启动队列处理器`php artisan queue:work`
+
+首先我们用相同的商品创建一笔订单，然后在数据库中手动修改这笔订单的`paid_at`字段使其成为已支付订单，再进入该订单的评价页面提交一个新的评价，看看队列处理器：
+
+[![](https://iocaffcdn.phphub.org/uploads/images/201812/23/5320/KFqCRZTWD3.png!large "file")](https://iocaffcdn.phphub.org/uploads/images/201812/23/5320/KFqCRZTWD3.png!large)
+
+然后到数据库里看看`order_items`表：
+
+[![](https://iocaffcdn.phphub.org/uploads/images/201812/23/5320/Kp9vgfU0Nz.png!large "file")](https://iocaffcdn.phphub.org/uploads/images/201812/23/5320/Kp9vgfU0Nz.png!large)
+
+可以看到`product_id=3`的商品有两个评价，分别是 3 分和 5 分，接下来去`products`表看看对应商品的记录：
+
+[![](https://iocaffcdn.phphub.org/uploads/images/201812/23/5320/QEn9ftfyKv.png!large "file")](https://iocaffcdn.phphub.org/uploads/images/201812/23/5320/QEn9ftfyKv.png!large)
+
+评分 4，评价数 2，符合我们的情况。
 
