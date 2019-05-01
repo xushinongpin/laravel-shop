@@ -70,7 +70,7 @@
   * [8.6. 用户界面 - 申请退款](di-ba-7ae0-wan-shan-ding-dan-mo-kuai/86-yong-hu-jie-mian-shen-qing-tui-kuan.md)
   * [8.7. 管理后台 - 拒绝退款](di-ba-7ae0-wan-shan-ding-dan-mo-kuai/87-guan-li-hou-tai-ju-jue-tui-kuan.md)
   * [8.8. 管理后台 - 同意退款（支付宝）](di-ba-7ae0-wan-shan-ding-dan-mo-kuai/88-guan-li-hou-tai-tong-yi-tui-kuan-ff08-zhi-fu-bao-ff09.md)
-  * 8.9. 管理后台 - 同意退款（微信）
+  * [8.9. 管理后台 - 同意退款（微信）](di-ba-7ae0-wan-shan-ding-dan-mo-kuai/89-guan-li-hou-tai-tong-yi-tui-kuan-ff08-wei-xin-ff09.md)
   * 8.10. 小结
 * [第九章. 优惠券模块](di-jiu-7ae0-you-hui-quan-mo-kuai.md)
   * 9.1. 管理后台 - 优惠券列表
